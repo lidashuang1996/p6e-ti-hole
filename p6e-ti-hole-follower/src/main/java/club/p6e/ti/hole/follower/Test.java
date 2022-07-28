@@ -1,4 +1,4 @@
-package com.example.demo;
+package club.p6e.ti.hole.follower;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
