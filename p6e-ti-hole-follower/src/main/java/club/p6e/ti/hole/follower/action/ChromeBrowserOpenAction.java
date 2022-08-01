@@ -44,7 +44,6 @@ public class ChromeBrowserOpenAction implements Action, OpenAction, Order {
 
     @Override
     public void execute(Metadata metadata) {
-        Lds8295722
         ChromeDriver driver = null;
         try {
             System.setProperty(WEB_DRIVER_NAME, webDriverPath);
