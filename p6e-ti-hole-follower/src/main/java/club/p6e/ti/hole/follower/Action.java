@@ -1,5 +1,7 @@
 package club.p6e.ti.hole.follower;
 
+import java.util.Map;
+
 /**
  * 动作执行接口
  * @author lidashuang
@@ -18,5 +20,29 @@ public interface Action {
      * @param metadata 执行的元数据
      */
     public void execute(Metadata metadata);
+
+    public default void executeXMLHttpRequestScript(String ...map) {
+        // var xhr = new XMLHttpRequest();
+        //xhr.open('GET', 'http://baidu.com', true);
+        //xhr.send();
+    }
+
+    public default void executeXMLHttpRequestScript(Map<String, String> map) {
+        // var xhr = new XMLHttpRequest();
+        //xhr.open('GET', 'http://baidu.com', true);
+        //xhr.send();
+    }
+
+    public default void executeXMLHttpRequestScript(String url, String ...map) {
+        // var xhr = new XMLHttpRequest();
+        //xhr.open('GET', 'http://baidu.com', true);
+        //xhr.send();
+    }
+
+    public default void executeXMLHttpRequestScript(String url, Map<String, String> map) {
+        // var xhr = new XMLHttpRequest();
+        //xhr.open('GET', 'http://baidu.com', true);
+        //xhr.send();
+    }
 
 }
