@@ -5,7 +5,7 @@ package club.p6e.ti.hole.follower.message;
  * @author lidashuang
  * @version 1.0
  */
-public interface MessageBus {
+public interface Message {
 
     /**
      * 推送消息给领导者

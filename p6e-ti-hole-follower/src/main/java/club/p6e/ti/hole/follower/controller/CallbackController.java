@@ -1,10 +1,11 @@
 package club.p6e.ti.hole.follower.controller;
 
+import club.p6e.ti.hole.follower.message.Message;
+import club.p6e.ti.hole.follower.utils.JsonUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/ti/hole/follower")
 public class CallbackController {
+
+    private final Message message;
+
+    public CallbackController(Message message) {
+        this.message = message;
+    }
 
     @RequestMapping("/callback")
     public ResultContext def(HttpServletRequest request) {
@@ -30,7 +37,13 @@ public class CallbackController {
                 }
             }
         }
-        return ResultContext.build(params);
+        if (params.get("type") != null) {
+            final String type = params.get("type");
+            this.message.execute(type, JsonUtil.toJson(params));
+            return ResultContext.build();
+        } else {
+            return ResultContext.build(1100, "PARAMETER_EXCEPTION", null);
+        }
     }
 
     /**
@@ -70,6 +83,17 @@ public class CallbackController {
          */
         public static ResultContext build(Object data) {
             return new ResultContext(DEFAULT_CODE, DEFAULT_MESSAGE, data);
+        }
+
+        /**
+         * 编译方法
+         * @param code 状态码
+         * @param message 消息
+         * @param data 数据的对象
+         * @return 结果上下文对象
+         */
+        public static ResultContext build(Integer code, String message, Object data) {
+            return new ResultContext(code, message, data);
         }
 
         /**

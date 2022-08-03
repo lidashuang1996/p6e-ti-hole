@@ -19,6 +19,12 @@ public interface Action {
     public String name();
 
     /**
+     * 排序
+     * @return 排序的序号
+     */
+    public int order();
+
+    /**
      * 执行方法
      * @param metadata 执行的元数据
      */

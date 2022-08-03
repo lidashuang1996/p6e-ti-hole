@@ -10,7 +10,7 @@ import java.util.Map;
  * @author lidashuang
  * @version 1.0
  */
-public class ChromeBrowserOpenAction implements Action, OpenAction, OrderAction {
+public class ChromeBrowserOpenAction implements Action, OpenAction {
 
     /** 权重 */
     private static final int ORDER = 0;

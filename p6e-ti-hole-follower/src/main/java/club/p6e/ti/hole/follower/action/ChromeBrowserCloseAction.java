@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * @author lidashuang
  * @version 1.0
  */
-public class ChromeBrowserCloseAction implements Action, CloseAction, OrderAction {
+public class ChromeBrowserCloseAction implements Action, CloseAction {
 
     /** 权重 */
     private static final int ORDER = 0;

@@ -37,8 +37,7 @@ public class P6eTiHoleFollowerApplication {
 			metadata.setBaseUrl("http://127.0.0.1:9233");
 			metadata.setApplicationContext(applicationContext);
 			final Map<String, OpenAction> map = applicationContext.getBeansOfType(OpenAction.class);
-			map.values().stream().sorted(Comparator.comparing(
-					item -> ((OrderAction) item).order())).forEach(item -> item.execute(metadata));
+			map.values().stream().sorted(Comparator.comparing(Action::order)).forEach(item -> item.execute(metadata));
 		};
 	}
 }

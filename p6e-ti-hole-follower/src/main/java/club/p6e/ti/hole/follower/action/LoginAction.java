@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  */
 @Component
-public class LoginAction implements Action, OrderAction {
+public class LoginAction implements Action {
 
     /** 权重 */
     private static final int ORDER = 100;
