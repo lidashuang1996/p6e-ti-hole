@@ -1,4 +1,4 @@
-package com.example.demo.websocket;
+package club.p6e.ti.hole.leader.websocket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;

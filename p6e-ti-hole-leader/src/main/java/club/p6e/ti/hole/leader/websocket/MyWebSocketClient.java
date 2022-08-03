@@ -1,4 +1,4 @@
-package com.example.demo.websocket;
+package club.p6e.ti.hole.leader.websocket;
 
 /**
  * @author lidashuang

@@ -1,4 +1,4 @@
-package com.example.demo.database;
+package club.p6e.ti.hole.leader.database;
 
 /**
  * 模拟数据缓存
