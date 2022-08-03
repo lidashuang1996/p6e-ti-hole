@@ -1,39 +1,39 @@
 package club.p6e.ti.hole.follower.action;
 
-import club.p6e.ti.hole.follower.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.context.ApplicationContext;
-
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 谷歌浏览器打开的操作
  * @author lidashuang
  * @version 1.0
  */
-public class ChromeBrowserOpenAction implements Action, OpenAction, Order {
+public class ChromeBrowserOpenAction implements Action, OpenAction, OrderAction {
 
     /** 权重 */
     private static final int ORDER = 0;
+    /** 类型 */
+    private static final String TYPE = "CHROME_BROWSER_OPEN_TYPE";
     /** 名称 */
     private static final String NAME = "CHROME_BROWSER_OPEN_ACTION";
     /** 驱动名称 */
     private static final String WEB_DRIVER_NAME = "webdriver.chrome.driver";
 
+    /** 设备 ID */
+    private final String id;
     /** 驱动路径 */
     private final String webDriverPath;
-    /** Spring 上下文对象 */
-    private final ApplicationContext applicationContext;
 
     /**
      * 构造方法初始化
+     * @param id 设备 ID
      * @param path 驱动路径
      */
-    public ChromeBrowserOpenAction(String path, ApplicationContext applicationContext) {
+    public ChromeBrowserOpenAction(String id, String path) {
+        this.id = id;
         this.webDriverPath = path;
-        this.applicationContext = applicationContext;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ChromeBrowserOpenAction implements Action, OpenAction, Order {
     }
 
     @Override
-    public void execute(Metadata metadata) {
+    public void execute(MetadataAction metadata) {
         ChromeDriver driver = null;
         try {
             // 设置参数数据
@@ -59,12 +59,20 @@ public class ChromeBrowserOpenAction implements Action, OpenAction, Order {
             // CDP -> 执行 CMD 命令
             driver.executeCdpCommand("Page.addScriptToEvaluateOnNewDocument", command);
             // 数据缓存到元数据对象中
+            metadata.setId(this.id);
             metadata.setDriver(driver);
             metadata.setDriverClass(ChromeDriver.class);
+            // 打开默认页面
+            driver.navigate().to("http://127.0.0.1:9233");
+            // 回调执行脚本
+            driver.executeScript(generateXMLHttpRequestScript(metadata.getBaseUrl(),
+                    "id", this.id, "type", TYPE, "name", NAME, "result", "SUCCESS", "message", ""));
         } catch (Exception e) {
             e.printStackTrace();
             if (driver != null) {
-                driver.executeScript();
+                // 回调执行脚本
+                driver.executeScript(generateXMLHttpRequestScript(metadata.getBaseUrl(),
+                        "id", this.id, "type", TYPE, "name", NAME, "result", "SUCCESS", "message", e.getMessage()));
             }
         }
     }

@@ -1,11 +1,11 @@
-package club.p6e.ti.hole.follower;
+package club.p6e.ti.hole.follower.action;
 
 /**
  * ACTION 的 ORDER
  * @author lidashuang
  * @version 1.0
  */
-public interface Order {
+public interface OrderAction {
 
     /**
      * 排序

@@ -1,4 +1,4 @@
-package club.p6e.ti.hole.follower;
+package club.p6e.ti.hole.follower.message;
 
 /**
  * 消息总线

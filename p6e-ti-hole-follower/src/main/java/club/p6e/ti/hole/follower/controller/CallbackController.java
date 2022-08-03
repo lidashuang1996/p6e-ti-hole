@@ -3,9 +3,13 @@ package club.p6e.ti.hole.follower.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 回调执行接口
  * @author lidashuang
  * @version 1.0
  */
@@ -14,9 +18,19 @@ import java.util.Map;
 public class CallbackController {
 
     @RequestMapping("/callback")
-    public ResultContext def(Map<String, Object> params) {
-        System.out.println(params);
-        return ResultContext.build();
+    public ResultContext def(HttpServletRequest request) {
+        final Map<String, String> params = new HashMap<>(16);
+        final String queryString = request.getQueryString();
+        if (queryString != null && !queryString.isEmpty()) {
+            final String[] qs = queryString.split("&");
+            for (final String q : qs) {
+                final String[] vs = q.split("=");
+                if (vs.length == 2) {
+                    params.put(vs[0], vs[1]);
+                }
+            }
+        }
+        return ResultContext.build(params);
     }
 
     /**
